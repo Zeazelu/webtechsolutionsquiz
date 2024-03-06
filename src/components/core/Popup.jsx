@@ -8,8 +8,8 @@ class Popup extends Component {
         
         this.state = {
             time: 'start',
-            title: 'Witamy w teście rekrutacyjnym na ambasadora WEBTECH SOLUTIONS',
-            text: 'Do rowzwiązania nie używaj Internetu ani ChatGPT <br /><br />',
+            title: 'Witamy w teście rekrutacyjnym na stanowisko - Ambasador WEBTECH SOLUTIONS',
+            text: 'Do rozwiązania testu nie używaj Internetu ani ChatGPT <br /><br />',
             buttonText: 'Rozpocznij test' 
         };
         
@@ -22,7 +22,7 @@ class Popup extends Component {
         if(time === 'start'){
             this.setState({
                 time: 'end',
-                title: 'Gratulacje!',
+                title: 'Dziękujemy za rozwiązanie testu!',
                 buttonText: 'Spróbuj jeszcze raz'
             });
 
@@ -44,7 +44,7 @@ class Popup extends Component {
             text: 'Koniec testu. <br /> Otrzymałeś: <strong>' + this.props.score + 
             '</strong> na <strong>' + 
             this.props.total +
-            '</strong> pytań.'
+            '</strong> puntków.'
         })
     }
 
@@ -66,7 +66,7 @@ class Popup extends Component {
                                 <span onClick={this.popupHandle}>
                                     <MyButton
                                         text={buttonText}
-                                        bck='#FF9800'
+                                        bck='#0d0d0e'
                                         color='#fff'
                                     />
                                 </span>

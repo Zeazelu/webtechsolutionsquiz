@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Logo from '../../assets/webtech.png';
+import './Header.css'
 
 
 const styles = {
@@ -15,10 +17,10 @@ const styles = {
     marginRight: 10,
   },
   color:{
-    backgroundColor: '#3c3c3c',
+    backgroundColor: '#0d0d0e',
   },
   whiteColor:{
-    color:'#fff',
+    color:'#0d0d0e',
   }
 };
 
@@ -29,7 +31,7 @@ function DenseAppBar(props) {
       <AppBar position="static" className={classes.color}> 
         <Toolbar variant="dense">
           <Typography variant="h6" className={classes.whiteColor}>
-            TEST NA AMBASADORA WEBTECH SOLUTIONS
+            <img className='header__logo' src={Logo} alt='logo' />
           </Typography>
         </Toolbar>
       </AppBar>

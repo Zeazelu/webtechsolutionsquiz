@@ -20,10 +20,10 @@ body {
     background: #ffffff;
 }
 .bck_red {
-    background: #ff4800;
+    background: #0d0d0e;
 }
 .bck_yellow {
-    background: #ffa800;
+    background: #0d0d0e;
 }
 
 /*====================
@@ -52,7 +52,7 @@ header .header_logo_title {
 ======================*/
 #question {
     margin-top: 100px;
-    background-color: #F57C00;
+    background-color: #0d0d0e;
     color: white;
     padding: 10px;
     text-align: center;
@@ -90,7 +90,7 @@ header .header_logo_title {
 
 #answers li {
     background-color: #fff;
-    border: 2px solid #FF9800;
+    border: 2px solid #0d0d0e;
     min-height: 70px;
     width: 100%;
     display: flex;
@@ -100,7 +100,7 @@ header .header_logo_title {
 }
 
 #answers li span {
-    background-color: #FF9800;
+    background-color: #0d0d0e;
     color: #fff;
     font-size: 30px;
     flex: 75px;
@@ -184,9 +184,9 @@ header .header_logo_title {
 }
 
 .fancy-btn {
-    border: 2px solid #FF9800;
+    border: 2px solid #0d0d0e;
     border-radius: 0;
-    background-color: #FF9800;
+    background-color: #0d0d0e;
     color: #fff;
     display: inline-block;
     font-size: 18px;
@@ -223,15 +223,15 @@ header .header_logo_title {
 
 .popup {
     text-align: center;
-    background-color: #fff;
+    background-color: #F8f7f4;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .popup h1 {
-    background-color: #FF9800;
-    color: white;
-    border-bottom: 1px solid #ccc;
+    background-color: #0d0d0e;
+    color: #F8f7f4;
+    border-bottom: 1px solid #F8f7f4;
     padding: 20px;
     margin-top: 0;
 }
@@ -252,8 +252,8 @@ footer {
     padding:50px 0px;
     text-align: center;
     font-size: 60px;
-    color:#ffffff;
-    background: red;
+    color:#F8f7f4;
+    background: #0d0d0e;
 }
 
 footer .footer_copyright {
