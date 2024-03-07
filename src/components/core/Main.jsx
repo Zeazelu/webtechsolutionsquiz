@@ -1,105 +1,122 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import data from '../questions_data/data';
 import Answers from './Answers.jsx';
 import Popup from './Popup.jsx';
 
-const Main = () => {
-    const [state, setState] = useState({
-        count: 0,
-        total: data.length,
-        showButton: false,
-        questionAnswered: false,
-        score: 0,
-        displayPopup: 'flex',
-        question: '',
-        answers: [],
-        correct: null,
-    });
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0,
+            total: data.length,
+            showButton: false,
+            questionAnswered: false,
+            score: 0,
+            displayPopup: 'flex'
+        }
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.handleShowButton = this.handleShowButton.bind(this);
+        this.handleStartQuiz = this.handleStartQuiz.bind(this);
+        this.handleIncreaseScore = this.handleIncreaseScore.bind(this);
+    }
 
-    useEffect(() => {
-        const { count } = state;
-        insertData(count);
-    }, []);
+    componentWillMount() {
+        let { count } = this.state;
+        this.insertData(count);
+    }
 
-    const insertData = (count) => {
-        setState(prevState => ({
-            ...prevState,
+    insertData(count) {
+        this.setState({
             question: data[count].question,
-            answers: [...data[count].answers],
+            answers: [  data[count].answers[0], 
+                        data[count].answers[1], 
+                        data[count].answers[2], 
+                        data[count].answers[3] 
+                    ],
             correct: data[count].correct,
-            count: prevState.count + 1
-        }));
-    };
+            count: this.state.count + 1
+        });
+    }
 
-    const handleShowButton = () => {
-        setState(prevState => ({
-            ...prevState,
+
+    handleShowButton() {
+        this.setState({
             showButton: true,
             questionAnswered: true
-        }));
-    };
+        })
+    }
+    
+    nextQuestion() {
+        let { count, total} = this.state;
 
-    const nextQuestion = () => {
-        const { count, total } = state;
-
-        if (count === total) {
-            setState(prevState => ({
-                ...prevState,
+        if(count === total){
+            this.setState({
                 displayPopup: 'flex'
-            }));
+            });
         } else {
-            insertData(count);
-            setState(prevState => ({
-                ...prevState,
+            this.insertData(count);
+            this.setState({
                 showButton: false,
                 questionAnswered: false
-            }));
+            });
         }
-    };
+    }
 
-    const handleStartQuiz = () => {
-        setState(prevState => ({
-            ...prevState,
+    handleStartQuiz() {
+        this.setState({
             displayPopup: 'none',
             count: 1
-        }));
-    };
+        });
+    }
 
-    const handleIncreaseScore = () => {
-        setState(prevState => ({
-            ...prevState,
-            score: prevState.score + 1
-        }));
-    };
+    handleIncreaseScore() {
+        this.setState({
+            score: this.state.score + 1
+        });
+    }
 
-    const { count, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = state;
+  render() {
+
+    let { count, total, question, answers, correct, showButton, questionAnswered, displayPopup, score} = this.state;
 
     return (
-        <div className="container text-center">
-            <Popup style={{ display: displayPopup }} score={score} total={total} startQuiz={handleStartQuiz} />
-            <div className="row">
-                <div className="col-lg-12 col-md-10 mx-auto">
-                    <div id="question">
-                        <h4 className="bg-light">Pytanie {count}/{total}</h4>
-                        <p>{question}</p>
-                    </div>
-                    <Answers
-                        answers={answers}
-                        correct={correct}
-                        showButton={handleShowButton}
-                        isAnswered={questionAnswered}
-                        increaseScore={handleIncreaseScore}
-                    />
-                    <div id="submit">
-                        {showButton ?
-                            <button className="fancy-btn" onClick={nextQuestion}>
-                                {count === total ? 'Zakończ test' : 'Następne pytanie'}
-                            </button> : <span></span>}
-                    </div>
+      <div className="container">
+       
+       <Popup style={{display: displayPopup}} 
+             score={score} 
+             total={total} 
+             startQuiz={this.handleStartQuiz}
+        />
+        
+        <div className="row">
+            <div className="col-lg-12 col-md-10">
+                <div id="question">
+                    <h4 className="bg-light">Pytanie {count}/{total}</h4>
+                    <p>{question}</p>
+                </div>
+
+                <Answers 
+                    answers={answers} 
+                    correct={correct} 
+                    showButton={this.handleShowButton} 
+                    isAnswered={questionAnswered} 
+                    increaseScore={this.handleIncreaseScore}
+                />
+
+
+                <div id="submit">
+                    {showButton ? 
+                    <button className="fancy-btn" 
+                            onClick={this.nextQuestion} >
+                    {count === total ? 'Zakończ test' : 'Następne pytanie'}
+                    </button> : <span></span>}
                 </div>
             </div>
         </div>
-    );
-};
 
+
+      </div>
+    )
+  }
+}
 export default Main;

@@ -1,66 +1,88 @@
-import React, { useState, useEffect } from 'react';
+import React, {Component} from 'react';
 
-const Answers = (props) => {
-    const [classNames, setClassNames] = useState(['', '', '', '']);
-
-    const checkAnswer = (index) => {
-        if (!props.isAnswered) {
-            const { correct, increaseScore, showButton } = props;
-            const answer = index + 1;
-
-            const updatedClassNames = [...classNames];
-
-            if (answer === correct) {
-                updatedClassNames[index] = 'right';
-                increaseScore();
-            } else {
-                updatedClassNames[index] = 'wrong';
-            }
-
-            setClassNames(updatedClassNames);
-
-            showButton();
-
-            // Use setTimeout with functional component
-            const timeoutId = setTimeout(() => {
-                clearClasses();
-            }, 700);
-
-            // Cleanup the timeout on component unmount
-            return () => clearTimeout(timeoutId);
+class Answers extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAnswered: false,
+            classNames: ['', '', '', '']
         }
-    };
+        
+        this.checkAnswer = this.checkAnswer.bind(this);
+        this.clearClasses = this.clearClasses.bind(this);
+    }
+    
+    checkAnswer(e) {
+        let { isAnswered } = this.props;
+        
+        if(!isAnswered) {
+            let elem = e.currentTarget;
+            let { correct, increaseScore } = this.props;
+            let answer = Number(elem.dataset.id);
+            let updatedClassNames = this.state.classNames;
 
-    const clearClasses = () => {
-        setClassNames(['', '', '', '']);
-    };
+            if(answer === correct){
+                updatedClassNames[answer-1] = 'right';
+                increaseScore();
+            }
+            else {
+                updatedClassNames[answer-1] = 'wrong';
+            }
+            
+            this.setState({
+                classNames: updatedClassNames,
+                
+            })
 
-    const { answers } = props;
+            this.props.showButton();       
+            var myTime = setTimeout(() => {
+                this.clearClasses();
+                //console.log("IN SET Timeout")
+            }, 1000);
+        }
+    }
+    clearClasses(){
+        this.setState({
+            classNames: ['', '', '', '']
+        })
+        
+    }
+    render() {
+        let { answers } = this.props;
+        let { classNames } = this.state;
+        
+        let transition = {
+            transitionName: "example",
+            transitionEnterTimeout: 500,
+            transitionLeaveTimeout: 300
+        }
+        
+        return (
+            <div id="answers">
+                <ul>
+                    <li onClick={this.checkAnswer} 
+                        className={classNames[0]} data-id="1">
+                    <span>A</span> 
+                    <p>{answers[0]}</p></li>
 
-    // useEffect to handle component lifecycle
-    useEffect(() => {
-        // Additional cleanup logic if needed
-        return () => {
-            clearClasses();
-        };
-    }, []);
+                    <li onClick={this.checkAnswer} 
+                        className={classNames[1]} data-id="2">
+                    <span>B</span> 
+                    <p>{answers[1]}</p></li>
 
-    return (
-        <div id="answers">
-            <ul>
-                {answers.map((answer, index) => (
-                    <li
-                        key={index}
-                        onClick={() => checkAnswer(index)}
-                        className={classNames[index]}
-                    >
-                        <span>{String.fromCharCode(65 + index)}</span>
-                        <p>{answer}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
+                    <li onClick={this.checkAnswer} 
+                        className={classNames[2]} data-id="3">
+                    <span>C</span> 
+                    <p>{answers[2]}</p></li>
 
-export default Answers;
+                    <li onClick={this.checkAnswer} 
+                        className={classNames[3]} data-id="4">
+                    <span>D</span> 
+                    <p>{answers[3]}</p></li>
+                </ul>
+            </div>
+        );
+    }
+}
+
+export default Answers
