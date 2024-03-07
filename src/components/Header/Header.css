@@ -1,0 +1,12 @@
+.header__container {
+    display: flex;
+    flex-direction: row;
+    height: 90px;
+    background-color: #0d0d0e;
+    align-items: center;
+    justify-content: center;
+}
+.header__container img {
+    height: 70px;
+    width: 260px;
+}
