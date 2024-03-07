@@ -75,10 +75,10 @@ const Main = () => {
     const { count, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = state;
 
     return (
-        <div className="container">
+        <div className="container text-center">
             <Popup style={{ display: displayPopup }} score={score} total={total} startQuiz={handleStartQuiz} />
             <div className="row">
-                <div className="col-lg-12 col-md-10">
+                <div className="col-lg-12 col-md-10 mx-auto">
                     <div id="question">
                         <h4 className="bg-light">Pytanie {count}/{total}</h4>
                         <p>{question}</p>

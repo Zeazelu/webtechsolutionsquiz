@@ -41,9 +41,9 @@ const Popup = (props) => {
 
     return (
         <Fade delay={500}>
-            <div className="popup-container" style={style}>
+            <div className="popup-container text-center" style={style}>
                 <div className="container">
-                    <div className="ml-5 col-md-10 col-10">
+                    <div className="col-md-10 col-12 mx-auto">
                         <div className="popup">
                             <h1>{title}</h1>
                             <p dangerouslySetInnerHTML={createMarkup(text)} />
